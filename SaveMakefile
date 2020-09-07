@@ -1,0 +1,57 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ahubert <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/10 15:42:35 by ahubert           #+#    #+#              #
+#    Updated: 2019/10/29 11:57:31 by ahubert          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	= printf.a
+
+SRCS	=	ft_c_convert.c\
+			ft_identify.c\
+			ft_initialize.c\
+			ft_intermediary.c\
+			ft_mx_convert.c\
+			ft_print_string.c\
+			ft_printf.c\
+			ft_putstr_toupper.c\
+			ft_putstr.c\
+			ft_s_convert.c\
+			ft_toupper.c\
+			ft_x_convert.c\
+			ft_p_convert.c\
+			ft_putchar.c\
+			ft_itoa_base.c
+
+OBJS	= $(SRCS:.c=.o)
+
+CC		= gcc -Wall -Werror -Wextra
+
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	cd srcs/libft && make
+
+$(LIBFT):
+	cd srcs/libft && make $@
+
+bonus: $(BONUS_OBJS)
+	ar rc $(NAME) $(BONUS_OBJS)
+
+all: $(NAME)
+
+clean:
+	rm -f $(OBJS) $(BONUS_OBJS)
+	cd srcs/libft && make $@
+
+fclean: clean
+	rm -f $(NAME)
+	cd srcs/libft && make $@
+
+re: fclean all
+
+.PHONY: all clean fclean re
